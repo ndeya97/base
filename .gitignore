@@ -1,0 +1,20 @@
+# Fichiers et dossiers Eclipse
+.classpath
+.project
+.settings/
+
+# Dossier de compilation généré par Eclipse
+bin/
+
+# En cas d'utilisation de Maven
+target/
+
+# Autres dossiers d'IDE potentiels
+.idea/         # En cas d'utilisation de IntelliJ en parallèle
+.vscode/       # Car utilisation de VS Code
+
+# Fichiers temporaires système
+*.log
+*.tmp
+*.bak
+*.swp
