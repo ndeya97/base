@@ -1,13 +1,21 @@
 package sn.isi.controller;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Fonction {
-	//Constante TVA 0
+	
+	//Constante TVA
 	private static final double TVA = 0.18;
 
 	/** Sous-programme qui saisit les informations d'un produit puis calcul et affiche le montant TTC	 */
 	public void saisirProduitCalculerEtAfficherMontantTTC(Scanner scanner) {
+		//Message de présentation
+		System.out.println("*********************************************************");
+		System.out.println("*********** Fonction 1 de Calcul du Montant TTC *********");
+		System.out.println("*********************************************************");
 		
 		//Saisie du nom du produit
 		System.out.print("Entrez le nom du produit : ");
@@ -17,19 +25,23 @@ public class Fonction {
 		System.out.print("Entrez la quantité du produit : ");
 		int quantite;
 		try {
-			quantite = Integer.parseInt(scanner.nextLine());
+			quantite = Integer.parseInt(scanner.nextLine().trim());
 		} catch (NumberFormatException e) {
 			System.out.println ("Erreur : le quantite doit être un nombre entier.");
 			return; //Sortie en cas d'erreur
 		}
 		
 		//Saisie du prix HT du produit
-		System.out.print("Entrez le prix HT du produit (€) : ");
+		System.out.print("Entrez le prix HT du produit (€), vous pouvez utiliser une virgule ou un point comme séparateur décimal : ");
+	    String input = scanner.nextLine().trim();
+	    
+	    
+	    //Conversion de l'entrée en double
 		double prixHT;
 		try {
-		 prixHT = Double.parseDouble(scanner.nextLine());
-		} catch (NumberFormatException e) {
-			System.out.println ("Erreur : le prix doit être un nombre valide.");
+		 prixHT = parseDecimal(input); // Conversion avec parseDecimal
+		} catch (ParseException e) {
+			System.out.println ("Erreur : le prix doit être un nombre valide selon vos paramètres régionaux.");
 			return; //Sortie en cas d'erreur
 		}
 			
@@ -42,19 +54,35 @@ public class Fonction {
 
 	}
 	
+	// Méthode pour convertir un nombre selon les paramètres régionaux
+    private double parseDecimal(String input) throws ParseException {
+        // Remplacer les points par des virgules pour standardiser
+        input = input.replace(".", ",");
+
+        // Utiliser les paramètres régionaux de l'utilisateur
+        Locale localeUtilisateur = Locale.getDefault(); 
+        NumberFormat format = NumberFormat.getInstance(localeUtilisateur);
+
+        // Convertir la chaîne en nombre en fonction des paramètres régionaux
+        Number number = format.parse(input);
+
+        // Retourner la valeur décimale
+        return number.doubleValue();
+    }
+	
 	// Méthode pour calculer le montant TTC
 	private double calculerMontantTTC(double prixHT, int quantite) {
 		return quantite * prixHT * (1 + TVA); 
 	}	
 	
 	
-	/** Sous-programme qui saisit un entier, un réel et un caractère.
-	 *  Si le caractère est ‘A’ ou ‘a’ ou ‘B’ ou ‘b’ alors 
-	 *  la méthode calcule puis affiche entier * réel si la partie décimal du réel est supérieur à entier.
-	 *  Sinon, la méthode calcule puis affiche partie décimal réel * entier.
-	 */
-	
+	/** Sous-programme qui saisit un entier, un réel et un caractère. Si le caractère est ‘A’ ou ‘a’ ou ‘B’ ou ‘b’ alors la méthode calcule puis affiche entier * réel si la partie décimal du réel est supérieur à entier. Sinon, la méthode calcule puis affiche partie décimal réel * entier. */
 	public void saisirEntierReelCaractereEtCalculer(Scanner scanner) {
+		//Message de présentation
+		System.out.println("****************************************************************");
+		System.out.println("*********** Fonction 2 de Calcul entier reel caractere *********");
+		System.out.println("****************************************************************");
+
 		
 		//Saisie d'un caractère
 		System.out.print("Entrez un caractère : ");
@@ -72,12 +100,17 @@ public class Fonction {
 		}
 		
 		//Saisie d'un reel
-		System.out.print("Entrez un reel :");
+		System.out.print("Entrez un reel, veuillez utiliser une virgule pour le séparateur décimal :");
+		String input = scanner.nextLine().trim();
+		
+		// Remplacer les points par des virgules pour standardiser
+	    input = input.replace(".", ",");
+		
 		double reel;
 		try {
-		 reel = Double.parseDouble(scanner.nextLine());
+		 reel = Double.parseDouble(input);
 		} catch (NumberFormatException e) {
-			System.out.println ("Erreur : le reel doit être un nombre valide.");
+			System.out.println ("Erreur : le reel doit être un nombre valide. Utilisez un point pour les décimales");
 			return; //Sortie en cas d'erreur
 		}
 		
@@ -93,7 +126,7 @@ public class Fonction {
             	System.out.println("Resultat : " + (partieDecimale * entier));       	
             }
 		} else {
-			System.out.println("Caractère non pris en charge.");
+			System.out.printf("Caractère non pris en charge.");
 		}
 		
 		
