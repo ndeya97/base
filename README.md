@@ -1,6 +1,6 @@
 # base - Java SE 
 
-Ce dépôt contient le code pour le TP1 du cours **"les bases en Java"** du Bootcamp Java & outils Devops dispensé par monsieur Ngor SECK CEO de Samane Corporation. Le but de ce TP est de se familiariser avec la création de projets Java en utilisant des packages et des sous-programmes. De plus cette application est codée de manière robustre afin de limiter au maximum les erreurs de saisie.
+Ce dépôt contient le code pour le TP1 du cours **"les bases en Java"** du Bootcamp Java & outils Devops dispensé par monsieur Ngor SECK CEO de Samane Corporation. Le but de ce TP est de se familiariser avec la création de projets Java en utilisant des packages et des sous-programmes. De plus cette application est codée de manière robustre et ergonomique afin de limiter au maximum les erreurs de saisie et d'améliorer l'expérience utilisateur.
 
 ## Structure du projet
 
